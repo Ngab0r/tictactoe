@@ -28,8 +28,8 @@ const checkWin = () => {
     winCheckArray.push(checkHorizontalWin(reservedCells));
     winCheckArray.push(checkVerticalWin(reservedCells));
     winCheckArray.push(checkDiagonalWin(reservedCells));
-    if (winCheckArray.filter(item => item.length === 3).length > 0) { return [true, winCheckArray[0], reservedCells.length]; };
-
+    const winnerArray = winCheckArray.find(item => item.length === 3);
+    if (winnerArray && winnerArray.length === 3) { return [true, winnerArray, reservedCells.length]; };
     return [false, winPositions, reservedCells.length];
 }
 
