@@ -12,7 +12,7 @@ const fillColumn = () => {
     event.target.classList.add('reserved');
     if ((winStatus = checkWin())[0]) { displayResult(winStatus); } else {
         currentGamer.innerHTML = currentGamer.innerHTML === 'X' ? 'O' : 'X';
-        if (winStatus[2].length === tableSize ** 2 - 1) { displayResult(winStatus); }
+        if (winStatus[2] === tableSize ** 2) { displayResult(winStatus); }
     }
 };
 
@@ -29,8 +29,8 @@ const checkWin = () => {
     winCheckArray.push(checkVerticalWin(reservedCells));
     winCheckArray.push(checkDiagonalWin(reservedCells));
     const winnerArray = winCheckArray.find(item => item.length === 3);
-    if (winnerArray && winnerArray.length === 3) { return [true, winnerArray, reservedCells.length]; };
-    return [false, winPositions, reservedCells.length];
+    if (winnerArray && winnerArray.length === 3) { return [true, winnerArray, reservedCells.filter(item => item !== '').length]; };
+    return [false, winPositions, reservedCells.filter(item => item !== '').length];
 }
 
 const displayResult = (winStatus) => {
