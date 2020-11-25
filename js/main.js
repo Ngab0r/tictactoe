@@ -24,9 +24,12 @@ const fillColumn = () => {
 const checkWin = () => {
     const reservedCells = boxRowsAndCellsArray.map(item => item.innerHTML);
     let winPositions = [];
-    if ((winPositions = checkHorizontalWin(reservedCells)).length === 3) { return [true, winPositions, reservedCells.length]; }
-    if ((winPositions = checkVerticalWin(reservedCells)).length === 3) { return [true, winPositions, reservedCells.length]; }
-    if ((winPositions = checkDiagonalWin(reservedCells)).length === 3) { return [true, winPositions, reservedCells.length]; }
+    const winCheckArray = [];
+    winCheckArray.push(checkHorizontalWin(reservedCells));
+    winCheckArray.push(checkVerticalWin(reservedCells));
+    winCheckArray.push(checkDiagonalWin(reservedCells));
+    if (winCheckArray.filter(item => item.length === 3).length > 0) { return [true, winCheckArray[0], reservedCells.length]; };
+
     return [false, winPositions, reservedCells.length];
 }
 
